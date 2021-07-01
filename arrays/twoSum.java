@@ -49,8 +49,6 @@ class twoSum {
 				left++;
 			}
 			else right--;
-		}
-
-				
+		}			
     return new int[0];
   }
