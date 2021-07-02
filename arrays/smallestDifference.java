@@ -1,4 +1,4 @@
-//
+// pair of elements from 2 arrays whos absolute difference is closest to zero
 
 // [1] -> Time: O(nlogn + mlogm), Space: O(1) 
 class Program {
