@@ -6,10 +6,10 @@ class Program {
     if (array.length == 0) return new ArrayList<Integer>();
 		
 		ArrayList<Integer> result = new ArrayList<Integer>();
-		int sr = 0; 									// start row
-		int er = array.length - 1; 		// end row
-		int sc = 0; 									// start column
-		int ec = array[0].length - 1; // end column
+		int sr = 0; 			// start row
+		int er = array.length - 1; 	// end row
+		int sc = 0; 			// start column
+		int ec = array[0].length - 1;   // end column
 		
 		while (sr <= er && sc <= ec) {
 			for (int col = sc; col <= ec; col++) {
@@ -81,10 +81,10 @@ class Program {
 		// direction 3 -- to up
 		
 		ArrayList<Integer> result = new ArrayList<Integer>();
-		int sr = 0; 									// start row
-		int er = array.length - 1; 		// end row
-		int sc = 0; 									// start column
-		int ec = array[0].length - 1; // end column
+		int sr = 0; 			// start row
+		int er = array.length - 1; 	// end row
+		int sc = 0; 			// start column
+		int ec = array[0].length - 1;   // end column
 		
 		while (sr <= er && sc <= ec) {
 			if (direction == 0) {
