@@ -3,7 +3,7 @@
 // [1] -> Time: O(n), Space: O(1)  
 class Program {
   public static LinkedList reverseLinkedList(LinkedList head) {
-		// sliding(3) -- last >> mid >> lead
+	// sliding(3) -- last >> mid >> lead
     LinkedList lead = head;
 		LinkedList mid = null;
 		LinkedList last = null; 
