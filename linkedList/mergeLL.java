@@ -54,7 +54,7 @@ class Program {
 }
 
 
-// [1] -> Time: O(m+n), Space: O(1)  
+// [2] -> Time: O(m+n), Space: O(1)  
   public static LinkedList mergeLinkedLists(LinkedList headOne, LinkedList headTwo) {
     LinkedList one = headOne;
 		LinkedList two = headTwo;
