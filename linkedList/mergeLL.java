@@ -52,3 +52,26 @@ class Program {
     return one.value < two.value ? one : two;
   }
 }
+
+
+// [1] -> Time: O(m+n), Space: O(1)  
+  public static LinkedList mergeLinkedLists(LinkedList headOne, LinkedList headTwo) {
+    LinkedList one = headOne;
+		LinkedList two = headTwo;
+		LinkedList prev = null; // previous of one
+		
+		while (one != null && two != null) {
+			if (one.value < two.value) {
+				prev = one;
+				one = one.next;
+			}
+			else {
+				if (prev != null) prev.next = two;
+				prev = two;
+				two = two.next;
+				prev.next = one;
+			}
+		}
+		if (one == null) prev.next = two;
+		return headOne.value < headTwo.value ? headOne : headTwo;
+  }
