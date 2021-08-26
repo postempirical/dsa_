@@ -1,8 +1,6 @@
 // tc = o(n+e), sc = o(n+e) + o(n) + o(n)
-class Solution
-{
-    public ArrayList<Integer> bfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj)
-    {
+class Solution {
+    public ArrayList<Integer> bfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj) {
         
       ArrayList<Integer> bfs = new ArrayList<>(); 
       boolean vis[] = new boolean[V + 1]; // 1 base indexing
@@ -15,8 +13,7 @@ class Solution
           q.add(0); 
           vis[0] = true; 
 
-          while (!q.isEmpty())
-          {
+          while (!q.isEmpty()) {
               Integer node = q.poll();
               bfs.add(node); 
 
@@ -30,9 +27,6 @@ class Solution
                   } 
               }
           }
-        
-        return bfs; 
-        
-        // Code here
+          return bfs; 
     }
 }
