@@ -1,8 +1,6 @@
 // undirected, dfs
-class Solution
-{
-    public boolean isCycle(int V, ArrayList<ArrayList<Integer>> adj)
-    {
+class Solution {
+    public boolean isCycle(int V, ArrayList<ArrayList<Integer>> adj) {
         boolean vis[] = new boolean[V];
         
         for(int i = 0; i < V; i++) {
@@ -36,37 +34,30 @@ class Node {
     }
 }
 
-class Solution
-{
+class Solution {
    static boolean checkForCycle(ArrayList<ArrayList<Integer>> adj, int s,
-            boolean vis[], int parent[])
-    {
+            boolean vis[], int parent[]) {
        Queue<Node> q =  new LinkedList<>(); //BFS
        q.add(new Node(s, -1));
        vis[s] =true;
        
-       while(!q.isEmpty())
-       {
+       while(!q.isEmpty()) {
            int node = q.peek().first;
            int par = q.peek().second;
            q.remove(); 
            
-           for(Integer it: adj.get(node))
-           {
-               if(vis[it]==false)  
-               {
+           for(Integer it: adj.get(node)) {
+               if(vis[it]==false)	{
                    q.add(new Node(it, node));
                    vis[it] = true; 
                }
-        
                else if(par != it) return true;
            }
        }
        return false;
     }
   
-    public boolean isCycle(int V, ArrayList<ArrayList<Integer>> adj)
-    {
+    public boolean isCycle(int V, ArrayList<ArrayList<Integer>> adj) {
         boolean vis[] = new boolean[V];
         Arrays.fill(vis,false);
         int parent[] = new int[V];
