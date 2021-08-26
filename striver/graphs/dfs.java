@@ -1,3 +1,4 @@
+// tc = o(n+e), sc = o(n+e) + o(n) + o(n)
 class Solution
 {
     public void dfs(int node, boolean vis[], ArrayList<ArrayList<Integer>> adj, ArrayList<Integer> storeDfs) {
