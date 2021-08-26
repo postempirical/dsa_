@@ -37,7 +37,7 @@ class Node {
 class Solution {
    static boolean checkForCycle(ArrayList<ArrayList<Integer>> adj, int s,
             boolean vis[], int parent[]) {
-       Queue<Node> q =  new LinkedList<>(); //BFS
+       Queue<Node> q =  new LinkedList<>();
        q.add(new Node(s, -1));
        vis[s] =true;
        
@@ -67,7 +67,6 @@ class Solution {
             if(vis[i]==false) 
                 if(checkForCycle(adj, i,vis, parent)) 
                     return true;
-    
         return false;
     }
 }
