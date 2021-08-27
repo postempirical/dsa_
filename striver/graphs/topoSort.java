@@ -29,3 +29,33 @@ class Solution {
         return topo; 
     }
 }
+
+
+// bfs (kahn's algo)
+class Solution {
+        int indeg[] = new int[V];
+        int topo[] = new int[V];
+        
+        for (int i = 0; i < V; i++) {
+            for (Integer it : adj.get(i)) {
+                indeg[it]++;
+            }
+        }
+        
+        Queue<Integer> q = new LinkedList<Integer>();
+        for (int i = 0; i < V; i++) {
+            if (indeg[i] == 0) q.add(i);
+        }
+        
+        int index = 0; 
+        while (!q.isEmpty()) {
+            Integer node = q.poll();
+            topo[index++] = node;
+            for (Integer it : adj.get(node)) {
+                indeg[it]--;
+                if (indeg[it] == 0) q.add(it);
+            }
+        }
+        return topo;
+    }
+}
