@@ -1,46 +1,89 @@
-// weighteed DAG
-class Node {
-    int first;
-    int second;
-    public Node(int first, int second) {
-        this.first = first;
-        this.second = second; 
-    }
+class Pair
+{
+    private int v;
+    private int weight;
+    Pair(int _v, int _w) { v = _v; weight = _w; }
+    int getV() { return v; }
+    int getWeight() { return weight; }
 }
 
-class Solution {
-   static boolean checkForCycle(ArrayList<ArrayList<Integer>> adj, int s,
-            boolean vis[], int parent[]) {
-       Queue<Node> q =  new LinkedList<>(); //BFS
-       q.add(new Node(s, -1));
-       vis[s] =true;
-       
-       while(!q.isEmpty()) {
-           int node = q.peek().first;
-           int par = q.peek().second;
-           q.remove(); 
-           
-           for(Integer it: adj.get(node)) {
-               if(vis[it]==false) {
-                   q.add(new Node(it, node));
-                   vis[it] = true; 
-               }
-               else if(par != it) return true;
-           }
-       }     
-       return false;
+class Main
+{
+    void topologicalSortUtil(int node, 
+														 Boolean visited[], 
+														 Stack stack, 
+														 ArrayList<ArrayList<Pair>> adj)
+    {
+
+        visited[node] = true;
+        for(Pair it: adj.get(node)) {
+            if(visited[it.getV()] == false) {
+                topologicalSortUtil(it.getV(), 
+																		visited, stack, adj);
+            }
+        }
+        stack.add(node);
     }
-  
-    public boolean isCycle(int V, ArrayList<ArrayList<Integer>> adj) {
-        boolean vis[] = new boolean[V];
-        Arrays.fill(vis,false);
-        int parent[] = new int[V];
-        Arrays.fill(parent,-1);  
-        
-        for(int i=0;i<V;i++)
-            if(vis[i]==false) 
-                if(checkForCycle(adj, i,vis, parent)) 
-                    return true;
-        return false;
+
+    void shortestPath(int s, 
+											ArrayList<ArrayList<Pair>> adj, int N)
+    {
+        Stack stack = new Stack();
+        int dist[] = new int[N];
+
+        Boolean visited[] = new Boolean[N];
+        for (int i = 0; i < N; i++)
+            visited[i] = false;
+
+        for (int i = 0; i < N; i++)
+            if (visited[i] == false)
+                topologicalSortUtil(i, visited, stack, adj);
+
+        for (int i = 0; i < N; i++)
+            dist[i] = Integer.MAX_VALUE;
+        dist[s] = 0;
+
+        while (stack.empty() == false)
+        {
+            int node = (int)stack.pop();
+
+            if (dist[node] != Integer.MAX_VALUE)
+            {
+                for(Pair it: adj.get(node)) {
+                    if(dist[node] + it.getWeight() 
+											 < dist[it.getV()]) {
+                        dist[it.getV()] = dist[node] + it.getWeight(); 
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < N; i++)
+        {
+            if (dist[i] == Integer.MAX_VALUE)
+                System.out.print( "INF ");
+            else
+                System.out.print( dist[i] + " ");
+        }
+    }
+    public static void main(String args[])
+    {
+        int n = 6;
+        ArrayList<ArrayList<Pair> > adj = 
+					new ArrayList<ArrayList<Pair> >();
+		
+		for (int i = 0; i < n; i++) 
+			adj.add(new ArrayList<Pair>());
+			
+		adj.get(0).add(new Pair(1, 2));
+		adj.get(0).add(new Pair(4, 1));
+		adj.get(1).add(new Pair(2, 3));
+		adj.get(2).add(new Pair(3, 6));
+		adj.get(4).add(new Pair(2, 2));
+		adj.get(4).add(new Pair(5, 4));
+		adj.get(5).add(new Pair(3, 1));
+		Main obj = new Main(); 
+		obj.shortestPath(0, adj, n); 
+		
     }
 }
