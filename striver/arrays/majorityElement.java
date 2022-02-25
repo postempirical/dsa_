@@ -25,15 +25,14 @@ public int majorityElement2(int[] nums) {
 
 
 // Moore voting algorithm
-public int majorityElement3(int[] nums) {
-    int count=0, ret = 0;
-    for (int num: nums) {
-        if (count==0)
-            ret = num;
-        if (num!=ret)
-            count--;
-        else
-            count++;
+class Solution {
+    public int majorityElement(int[] nums) {
+        int count = 0, res = 0;
+        for (int num : nums) {
+            if (count == 0) res = num;
+            else if (num == res) count++;
+            else count--;
+        }
+        return res;
     }
-    return ret;
 }
