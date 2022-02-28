@@ -10,6 +10,15 @@ public class Solution {
             fast = fast.next.next;
             slow = slow.next;
             if (fast == slow) return true;
+						// to find node where cycle start
+// 						if (fast == slow) {
+//                 fast = head;
+//                 while (slow != fast) {
+//                     slow = slow.next;
+//                     fast = fast.next;
+//                 }
+//                 return slow;
+//             }
         }
         return false;
     }
