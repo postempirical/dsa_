@@ -1,31 +1,35 @@
 // sort an array using recursion
 public class SortAnArray {
-	private static List<Integer> sort(List<Integer> l) {
-		if(l.size() == 1)
-			return l;
+	private static List<Integer> sort(List<Integer> list) {
+		if(list.size() == 1) return l;
+		
 		//hypothesis
-		Integer temp = l.get(l.size()-1);
-		l.remove(l.size()-1);
-		l = sort(l);
+		Integer temp = list.get(list.size() - 1);
+		list.remove(list.size() - 1);
+		list = sort(list);
+		
 		//induction
-		return l = insert(l, temp);
+		insert(list, temp);
+		
+		return list;
 	}
 
-	private static List<Integer> insert(List<Integer> l, int i) {
-		if(l.size() == 0 || i >= l.get(l.size()-1))
+	private static List<Integer> insert(List<Integer> l, int elem) {
+		if(list.size() == 0 || elem >= list.get(list.size() - 1))
 		{
-			l.add(i);
-			return l;
+			l.add(elem);
+			return list;
 		}
 		//hypothesis
-		int val = l.get(l.size() - 1);
-		l.remove(l.size()-1);
-		l = insert(l, i);
+		int val = list.get(list.size() - 1);
+		list.remove(list.size() - 1);
+		list = insert(list, elem);
 		//induction
-		l.add(val);
-		return l;
+		list.add(val);
+		return list;
 	}
   
+	// driver
   public static void main(String[] args) {
 		List<Integer> l = new ArrayList();
 		l.add(1);
