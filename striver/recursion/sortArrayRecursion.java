@@ -20,10 +20,12 @@ public class SortAnArray {
 			l.add(elem);
 			return list;
 		}
+		
 		//hypothesis
 		int val = list.get(list.size() - 1);
 		list.remove(list.size() - 1);
 		list = insert(list, elem);
+		
 		//induction
 		list.add(val);
 		return list;
