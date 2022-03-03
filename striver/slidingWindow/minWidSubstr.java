@@ -29,9 +29,9 @@ class Solution {
             // when count get 0
             while(count == 0 && i <= j){
                 if(count == 0 && j - i + 1 <= min) {
-					ans = s.substring(i,j + 1);
-					min =  j -i + 1 ;
-					}
+									ans = s.substring(i,j + 1);
+									min =  j -i + 1 ;
+								}
                 
                 // shrink left pointer 
                 // keep shrinkin as long as count stays 0
