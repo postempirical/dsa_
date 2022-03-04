@@ -48,3 +48,40 @@ public class SortAnArray {
 			System.out.println(i);
 	}
 }
+
+
+// reverse stack
+static void reverse(Stack<Integer> s) {
+		if(s.size()==1) return;
+		int val=s.pop();
+		reverse(s);
+		insert(s,val);
+		return;
+}
+
+static void insert(Stack<Integer> s,int temp){
+		if(s.size()==0){
+				s.push(temp);
+				return;
+		} 
+		int val=s.pop();
+		swap(s,temp);
+		s.push(val);
+		return;
+}
+
+
+// delete middle of a stack
+void middle(Stack<Integer> st){
+		int k = st.size() / 2 + 1;
+		delete(st, m);
+}
+void delete(Stack<Integer> st,int k){
+		if(k == 1){
+				st.pop();
+				return;
+		}
+		int temp = st.pop();
+		delete(st, m - 1);
+		st.push(temp);
+}
