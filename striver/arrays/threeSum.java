@@ -1,14 +1,24 @@
+// two pointer
 class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
         Arrays.sort(nums);
-        List<List<Integer>> res = 
-            new LinkedList<>();
+        List<List<Integer>> res = new LinkedList<>();
         for (int i = 0; i < nums.length - 2; i++) {
-            if (i == 0 || (i > 0 && (nums[i] != nums[i - 1]))) {
-                int lo = i + 1, hi = nums.length - 1;
+            // if i is 0 enter loop
+            // otherwise only enter loop if val != prev val
+            if (i == 0 || (i > 0 && nums[i] != nums[i - 1])) {
+                // declare lo, hi
+                int lo = i + 1;
+                int hi = nums.length - 1;
+                
+                // sum is target to hit
+                // b + c = -a
+                // need lo+hi pair equalling -nums[i]
                 int sum = 0 - nums[i];
+                
                 while (lo < hi) {
                     if (nums[lo] + nums[hi] == sum) {
+                        // add to list and skip duplicate lo,hi vals
                         res.add(Arrays.asList(nums[i], nums[lo], nums[hi]));
                         while ((lo < hi) && (nums[lo] == nums[lo + 1])) lo++;
                         while ((lo < hi) && (nums[hi] == nums[hi - 1])) hi--;
@@ -22,7 +32,6 @@ class Solution {
         return res;
     }
 }
-
 
 // using sets
 class Solution {
