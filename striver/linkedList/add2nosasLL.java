@@ -1,21 +1,32 @@
 // https://leetcode.com/problems/add-two-numbers/ 
 
 class Solution {
-    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+    public ListNode addTwoNumbers(ListNode a, ListNode b) {
+        ListNode dummy = new ListNode();
+        ListNode curr = dummy;
         int carry = 0;
-        ListNode dummy = new ListNode(0); // to get head
-        ListNode curr = dummy; // for new list
-        while (l1 != null || l2 != null || carry != 0) {
-            if (l1 != null) {
-                carry += l1.val;
-                l1 = l1.next;
+        
+        // keep going if either is non null or carry is not 0
+        while (a != null || b != null || carry != 0) {
+            int sum = 0;
+            
+            // add values and carry to sum
+            if (a != null) {
+                sum += a.val;
+                a = a.next;
             }
-            if (l2 != null) {
-                carry += l2.val;
-                l2 = l2.next;
+            if (b != null) {
+                sum += b.val;
+                b = b.next;
             }
-            curr.next = new ListNode(carry % 10);
-            carry = carry / 10;
+            // add carry and update carry
+            sum += carry;
+            carry = sum / 10;
+            
+            // create new node and point curr to it
+            // then move curr forward
+            ListNode node = new ListNode(sum % 10);
+            curr.next = node;
             curr = curr.next;
         }
         return dummy.next;
