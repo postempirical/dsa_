@@ -31,3 +31,8 @@ class Solution {
         return dummy.next;
     }
 }
+
+// To clarify, all you're doing is inserting then between pre and pre.next. 
+// You keep moving then forward by 1 until you reach the difference, m - n, 
+// & you keep making start.next point to then.next 
+// to insure it's always pointing to the tail part of the list.
