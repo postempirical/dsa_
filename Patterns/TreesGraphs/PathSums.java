@@ -37,3 +37,25 @@ class Solution {
 
 
 // PATH SUM 3
+
+// naive
+class Solution {
+    public int pathSum(TreeNode root, int sum) {
+        if (root == null) return 0;
+        return pathSumCalculate(root, sum) 
+            + pathSum(root.left, sum)
+            + pathSum(root.right, sum);
+    }
+    
+    // this function actually calculates the sum from given head node
+    // we need as path is NOT from root to leaf directly
+    // then we call this on all nodes using pathsum(left/right)
+    private int pathSumCalculate(TreeNode node, int sum) {
+        if (node == null) return 0;
+        int count = 0;
+        if (node.val == sum) count++;
+        count += pathSumCalculate(node.left, sum - node.val);
+        count += pathSumCalculate(node.right, sum - node.val);
+        return count;
+    }
+}
