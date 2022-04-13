@@ -20,27 +20,27 @@ class Solution {
             }
         }
         // copy back into board matrix
-        for(int i=0;i<board.length;i++)
+        for(int i = 0; i < board.length; i++)
         {
-            for (int j=0;j<board[i].length;j++)
+            for (int j = 0; j < board[i].length; j++)
             {
-                board[i][j]=output[i][j];
+                board[i][j] = output[i][j];
             }
         }
     }
     
     private int countNeighbours(int i, int j, int[][] board) {
-        int count=0;
+        int count = 0;
         // to find value in 8 directions on x-y axis
         // left | top | right | botRight | topRight | botLeft | topLeft | bottom
         int[][] direction = {{0,-1},{0,1},{1,0},{1,-1},{1,1},{-1,-1},{-1,1},{-1,0}};
         for(int[] dir:direction) {   
             // sorrounding [x][y]th cell
-            int x=i+dir[0];
-            int y=j+dir[1];
+            int x = i + dir[0];
+            int y = j + dir[1];
             // if x and y are in range ie > 0 and < len
             if(x >= 0 && y >= 0 && x < board.length && y < board[0].length)
-                count+=board[x][y];
+                count += board[x][y];
          }
          return count;
     }
