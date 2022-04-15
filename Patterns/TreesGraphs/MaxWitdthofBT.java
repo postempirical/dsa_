@@ -41,41 +41,43 @@ class Solution {
 
 
 // instead of 2 queues, can also create a pair class
-class Pair {
-    TreeNode node;
-    int num;
-    Pair(TreeNode node, int num) {
-        this.node = node;
-        this.num  = num;
-    }
-}
-    
 class Solution {
-    public int widthOfBinaryTree(TreeNode root) {
-        if (root == null) return 0;
-        int ans = 0;
-        Queue<Pair> q = new LinkedList<Pair>();
-        q.add(new Pair(root, 0));
-        while (!q.isEmpty()) {
-            int size = q.size();
-            // make mini as 0 at start
-            int mini = q.peek().num;
-            int first = 0, last = 0;
-            for (int i = 0; i < size; i++) {
-                int index = q.peek().num - mini;
-                TreeNode node = q.peek().node;
-                q.poll();
-                
-                if (i == 0) first = index;
-                if (i == size - 1) last = index;
-                
-                if (node.left != null)
-                    q.add(new Pair(node.left, index * 2 + 1));
-                if (node.right != null)
-                    q.add(new Pair(node.right, index * 2 + 2));
-            }
-            ans = Math.max(ans, last - first + 1);
+    class MyNode {
+        TreeNode node;
+        int idx;
+        MyNode(TreeNode node, int idx){
+            this.node = node;
+            this.idx = idx;
         }
-        return ans;
+        
+    }
+    
+    public int widthOfBinaryTree(TreeNode root) {
+         Queue<MyNode> q = new LinkedList<>();
+        q.add(new MyNode(root,0));
+        int max = 0;
+        while(!q.isEmpty())
+        {
+            int size = q.size();
+            int start = 0, end = 0;
+            for(int i=0; i<size; i++)
+            {
+                MyNode p = q.remove();
+                int index = p.idx; 
+                if(i==0) start = index; //start and end index for each level
+                if(i==size-1) end = index;
+                if(p.node.left!=null)
+                {
+                    q.add(new MyNode(p.node.left, 2*p.idx+1));
+                }
+                
+                if(p.node.right!=null)
+                {
+                    q.add(new MyNode(p.node.right, 2*p.idx+2));
+                }
+            }
+            max = Math.max(max, end - start + 1);
+        }
+        return max;    
     }
 }
