@@ -47,8 +47,10 @@ class Solution {
             // if parents of u,v have same rank
             // connect any to any
             // increase rank to which connected
-            parent[root_v] = root_u;
-            rank[root_u]++;
+            else {
+                parent[root_v] = root_u;
+                rank[root_u]++;
+            }
             
             // after every successful union 
             // total components will decrease by 1
