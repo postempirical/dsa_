@@ -20,3 +20,6 @@ class Solution {
         return res;
     }
 }
+
+// to find number times the array is rotated
+// simply return the index of the minimum element found
