@@ -24,3 +24,31 @@ class Solution {
         return -1;
     }
 }
+
+
+// if duplicate values also present
+class Solution {
+    public boolean search(int[] nums, int target) {
+        int left = 0, right = nums.length - 1;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] == target) return true;
+            
+            // if left half is sorted
+            if (nums[left] < nums[mid]) {
+                if (target >= nums[left] && target < nums[mid])
+                    right = mid;
+                else left = mid + 1;
+            }
+            
+            // similarly if right half is sorted
+            else if (nums[mid] < nums[right]) {
+                if (target > nums[mid] && target < nums[left])
+                    left = mid + 1;
+                else right = mid;
+            }
+            else left++;
+        }
+        return false;
+    }
+}
