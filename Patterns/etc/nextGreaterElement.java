@@ -1,3 +1,4 @@
+// NGE 1
 // brute
 class Solution {
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
@@ -41,3 +42,26 @@ class Solution {
         return ans;
     }
 }
+
+
+// NGE 2
+class Solution {
+    public int[] nextGreaterElements(int[] nums) {
+        Stack<Integer> st = new Stack<>();
+        int len = nums.length;
+        int[] ans = new int[len];
+        
+        for (int i = 2 * len - 1; i >= 0; i--) {
+            // pop all values smaller than current num
+            while (!st.isEmpty() && st.peek() <= nums[i % len]) st.pop();
+            // only first half is neede
+            if (i < len) {
+                if (!st.isEmpty()) ans[i] = st.peek();
+                else ans[i] = -1;
+            }
+            st.add(nums[i % len]);
+        }
+        return ans;
+    }
+}
+
