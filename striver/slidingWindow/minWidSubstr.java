@@ -1,49 +1,39 @@
-// https://leetcode.com/problems/minimum-window-substring/
 class Solution {
     public String minWindow(String s, String t) {
-        // corner cases
-        if(s == null || t == null 
-           || s.length() == 0 
-           || t.length() == 0 || s.length() < t.length()) 
-            return "";
+        HashMap<Character, Integer> map = new HashMap<>();
+        for (char c : t.toCharArray()) 
+            map.put(c, map.getOrDefault(c, 0) + 1);
         
-        int min = s.length();
-        String ans = "";
-        int i = 0, j = 0;
+        int count = map.size();
         
-        Map<Character, Integer> map = new HashMap<>();
-        int count = t.length(); // the number of characters that I need to match
-        for(char c : t.toCharArray()) map.put(c, map.getOrDefault(c, 0) + 1);
+        int begin = 0, end = 0;
+        int head = 0; // pointer for start of substring
+        int len = Integer.MAX_VALUE; // head + len = result
         
-        while(j < s.length()){
-            char c = s.charAt(j);
-            
-            // if map has key, dec the freq
-            // if freq gets 0 dec count
-            if(map.containsKey(c)) {
+        while (end < s.length()) {
+            char c = s.charAt(end);
+            if (map.containsKey(c)) {
                 map.put(c, map.get(c) - 1);
-                if(map.get(c) >= 0) count--; 
+                if (map.get(c) == 0) count--;
             }
+            end++;
             
-            // we will have a possible ans
-            // when count get 0
-            while(count == 0 && i <= j){
-                if(count == 0 && j - i + 1 <= min) {
-									ans = s.substring(i,j + 1);
-									min =  j -i + 1 ;
-								}
-                
-                // shrink left pointer 
-                // keep shrinkin as long as count stays 0
-                char ch = s.charAt(i);
-                if(map.containsKey(ch)){
-                    map.put(ch, map.get(ch) + 1);
-                    if(map.get(ch) >= 1) count++;
+            while (count == 0) {
+                char temp = s.charAt(begin);
+                if (map.containsKey(temp)) {
+                    map.put(temp, map.get(temp) + 1);
+                    if (map.get(temp) > 0) count++;
                 }
-                i++;
-            } 
-            j++;
+                
+                // MAIN CONDITION
+                if (end - begin < len) {
+                    len = end - begin;
+                    head = begin;
+                }
+                begin++;
+            }
         }
-        return ans;
+        if (len == Integer.MAX_VALUE) return "";
+        return s.substring(head, head + len);
     }
 }
