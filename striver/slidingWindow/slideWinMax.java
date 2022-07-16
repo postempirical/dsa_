@@ -1,32 +1,33 @@
-// https://leetcode.com/problems/sliding-window-maximum/
 class Solution {
     public int[] maxSlidingWindow(int[] nums, int k) {
-        Deque<Integer> q = new LinkedList<>();
-        int[] max_array = new int[nums.length - k + 1];
-        int i = 0, j = 0;
+        Deque<Integer> dq = new LinkedList<>();
+        int[] res = new int[nums.length - k + 1];
+        int begin = 0, end = 0;
         
-        while (j < nums.length) {
+        while (end < nums.length) {
             // if empty just add to q
-            // else keep removing smaller vals from end
-            // and then insert in the end
-            // this way head of q will always be max
-            if (q.isEmpty()) q.add(nums[j]);
+            // else keep removing smaller vals from the tail 
+            // and then insert in the dq
+            // this way head of dq will always be max
+            if (dq.isEmpty()) dq.add(nums[end]);
             else {
-                while (q.size() > 0 && q.peekLast() < nums[j]) 
-                    q.removeLast();
-                q.add(nums[j]);
+                while (dq.size() > 0 && dq.peekLast() < nums[end])
+                    dq.removeLast();
+                dq.add(nums[end]);
             }
             
-            if (j - i + 1 == k) {
-                max_array[i] = q.peek();
+            // window size achieved 
+            if (end - begin + 1 == k) {
+                // add front of dq to res
+                res[begin] = dq.peekFirst();
                 
                 // sliding
-                // if val are same we need new max in next iteration
-                // so remove the head of queue
-                if (q.peek() == nums[i]) q.removeFirst();
-                i++;
-            } 
-            j++;
+                // remove front of dq if its equal to begin value
+                if (dq.peekFirst() == nums[begin]) dq.removeFirst();
+                begin++;
+            }
+            end++;
         }
-        return max_array;
-    
+        return res;
+    }
+}
