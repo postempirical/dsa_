@@ -1,4 +1,52 @@
-// https://leetcode.com/problems/find-all-anagrams-in-a-string/
+class Solution {
+    public List<Integer> findAnagrams(String s, String p) {
+        List<Integer> res = new LinkedList<>();
+        if (p.length() > s.length()) return res;
+        
+        // character-frequency hashmap of given string
+        Map<Character, Integer> map = new HashMap<>();
+        for(char c : p.toCharArray())
+            map.put(c, map.getOrDefault(c, 0) + 1);
+        
+        // total entries in map
+        int count = map.size();
+        
+        int begin = 0, end = 0;
+        
+        while (end < s.length()) {
+            // get current character
+            char c = s.charAt(end);
+            
+            // update map and count
+            if( map.containsKey(c) ) {
+                map.put(c, map.get(c) - 1);
+                if(map.get(c) == 0) count--;
+            }
+            end++;
+            
+            // if count is 0, pattern matched
+            // now re-update map, count before moving begin
+            while(count == 0){
+                char tempc = s.charAt(begin);
+                if(map.containsKey(tempc)){
+                    map.put(tempc, map.get(tempc) + 1);
+                    if(map.get(tempc) > 0){
+                        count++;
+                    }
+                }
+                
+                if(end - begin == p.length()) 
+                    res.add(begin);
+                
+                begin++;
+            }
+        }
+        return res;
+    }
+}
+
+
+// av approach
 class Solution {
     public List<Integer> findAnagrams(String s, String p) {
         // s is a word, p is the pattern
@@ -9,12 +57,6 @@ class Solution {
         HashMap<Character, Integer> map = new HashMap<>();
         
         // make a character, its frequency map
-        // for (int i = 0; i < p.length(); i++) {
-        //     if (map.containsKey(p.charAt(i)))
-        //         map.put(p.charAt(i), map.get(p.charAt(i) + 1));
-        //     else map.put(p.charAt(i), 1);
-        // }
-        // why tf is this showing runtime error
         for(char c : p.toCharArray()){
             map.put(c, map.getOrDefault(c, 0) + 1);
         }
