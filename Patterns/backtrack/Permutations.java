@@ -38,9 +38,12 @@ class Solution {
             res.add(new ArrayList<>(list));
         else {
             for (int i = 0; i < nums.length; i++) {
+								// if already used skip this
+								// if equal to prev and prev is not used skip
+								// as prev will be marked used later on
                 if (used[i]) continue; 
                 if (i > 0 && nums[i] == nums[i - 1] && 
-                    used[i - 1]) continue;
+                    !used[i - 1]) continue;
                 used[i] = true;
                 list.add(nums[i]);
                 backtrack(res, list, nums, used);
