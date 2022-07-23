@@ -37,3 +37,32 @@ class Solution {
         return dp[nums.length - 1];
     }
 }
+
+
+// HOUSE ROBBER 2
+class Solution {
+    public int rob(int[] nums) {
+        // like house robber 1
+        // just get max result of 2 arrays
+        // one will exclude first, other exclude first
+        // since first and last cannot be together
+        if (nums.length == 0) return 0;
+        if (nums.length == 1) return nums[0];
+        int[] excludeFirst = Arrays.copyOfRange(nums, 1, nums.length);
+        int[] excludeLast = Arrays.copyOfRange(nums, 0, nums.length - 1);
+        return Math.max(solve(excludeFirst), solve(excludeLast));
+    }
+    
+    private int solve(int[] arr) {
+        int[] dp = new int[arr.length + 1];
+        dp[0] = arr[0];
+        if (arr.length == 2) return Math.max(arr[0], arr[1]);
+        for (int i = 1; i < arr.length; i++) {
+            int pick = arr[i];
+            if (i > 1) pick += dp[i - 2];
+            int notpick = dp[i - 1];
+            dp[i] = Math.max(pick, notpick);
+        }
+        return dp[arr.length - 1];
+    }
+}
