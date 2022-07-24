@@ -1,16 +1,16 @@
 class Solution {
     public boolean isSymmetric(TreeNode root) {
         if (root == null) return false;
-        return func(root.left, root.right);
+        return solve(root.left, root.right);
     }
     
-    public boolean func (TreeNode left, TreeNode right) {
-        if (left == null || right == null) 
-            return left == right;
+    private boolean solve(TreeNode left, TreeNode right) {
+        // base case
+        if (left == null && right == null) return true;
+        if (left == null || right == null) return false;
         
         if (left.val != right.val) return false;
         
-        return func(left.left, right.right) 
-            && func(left.right, right.left);
+        return solve(left.left, right.right) && solve(left.right, right.left);
     }
 }
