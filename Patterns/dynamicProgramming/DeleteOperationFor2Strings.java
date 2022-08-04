@@ -10,6 +10,7 @@ class Solution {
         return res;
     }
     
+		// LONGEST COMMON SUBSEQUENCE
     private int solve(int i, int j, String word1, String word2, int[][] dp) {
         if (i < 0 || j < 0) return 0;
         
