@@ -28,6 +28,29 @@ class Solution {
 }
 
 
+// MEMOIZE NON TLE
+class Solution {
+    public int change(int amount, int[] coins) {
+        Integer[][] dp = new Integer[coins.length][amount + 1];
+        return solve(coins, amount, 0, dp);
+    }
+    
+    private int solve(int[] nums, int target, int ind, Integer[][] dp) {
+        if (ind == nums.length || target <= 0) {
+            if (target == 0) return 1;
+            else return 0;
+        }
+        
+        if (dp[ind][target] != null) return dp[ind][target];
+        
+        int pick = solve(nums, target - nums[ind], ind, dp);
+        int notpick = solve(nums, target, ind + 1, dp);
+        
+        return dp[ind][target] = pick + notpick;
+    }
+}
+
+
 // TABULAR
 class Solution {
     public int change(int amount, int[] coins) {
