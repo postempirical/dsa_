@@ -1,33 +1,32 @@
 // https://leetcode.com/problems/subarray-sum-equals-k/
 class Solution {
     public int subarraySum(int[] nums, int k) {
-        int sum = 0, ans = 0;
+        int prefix = 0, count = 0;
         HashMap<Integer, Integer> map = new HashMap<>();
+        // add an empty prifix for value 0, making its count 1
+        // [1 1 1 4 -2 1] k = 3
+        // here at ind = 2 we get a subarr
+        // so we need sum(3) - k = 0 in map already for our algo to work
+        map.put(0, 1); 
         
-        // in the start we have a dummy val 0 with 1 freq
-        map.put(0,1);
         for (int i = 0; i < nums.length; i++) {
-            sum += nums[i];
+            prefix += nums[i];
+            // if prefix - k is present
+            // increase count by how many times we found prefix - k ie its freq
+            if (map.containsKey(prefix - k))
+                count += map.get(prefix - k);
             
-            // add remaining sum freq to result
-            // because if rem sum appeared x times
-            // this means k was achieved x times too
-            if (map.containsKey(sum - k)) {
-                ans += map.get(sum - k);
-            }
-            if (map.containsKey(sum)) 
-                map.put(sum, map.get(sum) + 1);
-            else map.put(sum, 1);
+            // if prefix - k is not present
+            // increase freq of prefixSum
+            map.put(prefix, map.getOrDefault(prefix, 0) + 1);
         }
-        return ans;
+        return count;
     }
 }
 
 
-// longest subarr of sum k
+// LONGEST SUBARRAY OF SIZE K
 // here instead of count we need max length of subarr
-
-
 static int lenOfLongSubarr(int[] arr, int n, int k)
 {
 			 // HashMap to store (sum, index) tuples
