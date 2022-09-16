@@ -42,11 +42,28 @@ class Solution {
         map.put('M', 1000);
         
         int res = 0;
-        for (int i = 0; i < s.length(); i++) {
-            if (i > 0 && map.get(s.charAt(i)) > map.get(s.charAt(i - 1)))
-                res += map.get(s.charAt(i)) - 2 * map.get(s.charAt(i - 1));
+        
+        // if current is lesser than next, add their difference
+        // ALSO SKIP THE NEXT DIGIT
+        int i = 0;
+        while (i < s.length() - 1) {
+            if (map.get(s.charAt(i)) < map.get(s.charAt(i + 1)))
+                res += map.get(s.charAt(i + 1)) - map.get(s.charAt(i++));
             else res += map.get(s.charAt(i));
+            i++;
         }
+        // if is is still on the last digit we need to add it
+        if (i == s.length() - 1) res += map.get(s.charAt(i));
         return res;
     }
+	
+	  // ANOTHER APPROACH
+		// for (int i = 0; i < s.length(); i++) {
+		//     // if current is greater than prev, minus 2 times prev to negate its addition
+		//     if (i > 0 && map.get(s.charAt(i)) > map.get(s.charAt(i - 1)))
+		//         res += map.get(s.charAt(i)) - 2 * map.get(s.charAt(i - 1));
+		//     else res += map.get(s.charAt(i));
+		// }
 }
+
+
