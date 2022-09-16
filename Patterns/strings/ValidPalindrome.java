@@ -1,23 +1,18 @@
 class Solution {
     public boolean isPalindrome(String s) {
-        int start = 0;
-        int end = s.length() - 1;
-        char head, tail;
+        int start = 0, end = s.length() - 1;
         while (start < end) {
-            head = s.charAt(start);
-            tail = s.charAt(end);
-            // skip if not a letter or digit
-            if (!Character.isLetterOrDigit(head)) start++;
-            else if (!Character.isLetterOrDigit(tail)) end--;
-            // if valid then check for ineqality 
-            // if equal continue to next character else return false
-            else 
-            {
-                if (Character.toLowerCase(head) != Character.toLowerCase(tail)) 
-                    return false;
+            while (start < end && !Character.isLetterOrDigit(s.charAt(start))) 
                 start++;
+            
+            while (start < end && !Character.isLetterOrDigit(s.charAt(end))) 
                 end--;
-            }
+            
+            if (Character.toLowerCase(s.charAt(start)) != 
+                Character.toLowerCase(s.charAt(end)))
+                return false;
+            
+            start++; end--;
         }
         return true;
     }
